@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="id" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PhysiViz AI – AI Visualisasi Soal Fisika</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS v3 CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brandDark: '#1e293b',
+              brandDarker: '#0f172a',
+              brandLight: '#60a5fa',
+              brandBlue: '#1e3a8a',
+              brandPurple: '#818cf8',
+              brandPurpleDark: '#4f46e5',
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              display: ['Space Grotesk', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            }
+          }
+        }
+      }
+    </script>
+    
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="./style.css">
+    
+    <!-- Lucide Icon Library -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body class="bg-brandDarker text-slate-100 font-sans min-h-screen selection:bg-violet-500/30 selection:text-violet-200">
+
+    <!-- Navbar Section -->
+    <header id="navbar" class="sticky top-0 z-50 bg-brandDarker/85 backdrop-blur-md border-b border-blue-900/40 transition-all duration-300">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          
+          <!-- Logo Teks -->
+          <div class="flex items-center space-x-2">
+            <div class="bg-gradient-to-tr from-blue-500 to-indigo-600 p-2 rounded-xl shadow-md shadow-indigo-500/20">
+              <i data-lucide="atom" class="w-6 h-6 text-slate-100 animate-spin-slow"></i>
+            </div>
+            <span class="text-xl font-bold font-display tracking-tight text-white flex items-center space-x-1.5">
+              <span>PhysiViz</span>
+              <span class="text-gradient font-extrabold text-sm bg-blue-950/40 px-1.5 py-0.5 rounded-md border border-blue-800/40">AI</span>
+            </span>
+          </div>
+
+          <!-- Desktop Navigation -->
+          <nav class="hidden md:flex items-center space-x-8">
+            <a href="#" class="text-slate-300 hover:text-blue-400 font-medium text-sm transition font-sans">Beranda</a>
+            <a href="#cara-kerja" class="text-slate-300 hover:text-blue-400 font-medium text-sm transition font-sans">Cara Kerja</a>
+            <a href="#tentang" class="text-slate-300 hover:text-blue-400 font-medium text-sm transition font-sans">Tentang</a>
+          </nav>
+
+          <!-- Action Button / CTA -->
+          <div class="hidden md:flex items-center">
+            <a href="#input-section" class="bg-slate-900 hover:bg-slate-800 text-blue-400 border border-blue-900/50 font-medium text-sm px-4.5 py-2 rounded-xl transition flex items-center space-x-2">
+              <i data-lucide="sparkles" class="w-4 h-4 text-blue-400"></i>
+              <span>Coba Demo</span>
+            </a>
+          </div>
+
+          <!-- Mobile Menu Toggle Button -->
+          <div class="md:hidden">
+            <button id="mobile-menu-btn" class="text-slate-400 hover:text-white focus:outline-none p-2 rounded-lg hover:bg-slate-800 transition" aria-label="Toggle Menu">
+              <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Drawer -->
+      <div id="mobile-menu" class="hidden md:hidden bg-brandDark border-t border-blue-900/40 px-4 pt-3 pb-4 space-y-2">
+        <a href="#" class="block text-slate-300 hover:text-blue-400 font-medium py-2 rounded transition">Beranda</a>
+        <a href="#cara-kerja" class="block text-slate-300 hover:text-blue-400 font-medium py-2 rounded transition">Cara Kerja</a>
+        <a href="#tentang" class="block text-slate-300 hover:text-blue-400 font-medium py-2 rounded transition">Tentang</a>
+        <a href="#input-section" class="block bg-slate-900 text-blue-400 border border-blue-900/40 text-center font-medium py-2.5 rounded-lg transition mt-4">
+          Mulai Visualisasi
+        </a>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative overflow-hidden pt-12 pb-20 md:py-32 grid-bg">
+      <div class="absolute inset-0 bg-gradient-to-b from-brandDarker via-brandDarker/90 to-brandDark"></div>
+      
+      <!-- Top Decorative Blur -->
+      <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-80 h-80 bg-blue-600/10 blur-[120px] rounded-full pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Hero Text -->
+          <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+            <div class="inline-flex items-center space-x-2 bg-blue-950/40 border border-blue-900/50 py-1.5 px-3.5 rounded-full text-blue-300 text-xs font-semibold tracking-wide shadow-inner">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-blue-400"></i>
+              <span>Teknologi Pembelajaran Interaktif</span>
+            </div>
+            
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-display tracking-tight text-white leading-[1.15]">
+              Visualisasikan Soal <br class="hidden sm:inline">
+              Fisika dengan <span class="text-gradient">AI</span>
+            </h1>
+            
+            <p class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-sans leading-relaxed">
+              Ubah soal cerita fisika menjadi visualisasi yang mudah dipahami, temukan konsep dan rumus yang relevan, serta pelajari langkah penyelesaiannya.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 pt-2">
+              <button id="hero-start-btn" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-indigo-500/20 transition-all duration-300 flex items-center justify-center space-x-2 cursor-pointer neon-glow-purple">
+                <span>Mulai Visualisasi</span>
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+              </button>
+              <a href="#cara-kerja" class="bg-slate-900/60 hover:bg-slate-800/60 border border-blue-900/30 text-slate-300 font-semibold px-8 py-4 rounded-xl transition flex items-center justify-center space-x-2">
+                <span>Cara Kerja</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Hero Illustration (Interactive Physics Model) -->
+          <div class="lg:col-span-5 flex justify-center">
+            <div class="relative w-72 h-72 sm:w-80 sm:h-80 bg-brandDark border border-blue-900/40 rounded-3xl p-6 shadow-2xl animate-physics-float flex items-center justify-center overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-tr from-brandDark/40 to-blue-950/20"></div>
+              
+              <!-- Orbital Rings Simulation -->
+              <div class="absolute w-60 h-60 border border-dashed border-blue-900/30 rounded-full animate-spin-slow"></div>
+              <div class="absolute w-44 h-44 border border-dashed border-blue-500/20 rounded-full animate-spin" style="animation-duration: 12s;"></div>
+              <div class="absolute w-28 h-28 border border-dashed border-indigo-500/20 rounded-full animate-spin" style="animation-duration: 8s;"></div>
+
+              <!-- Rotating Particles -->
+              <div class="absolute top-[35%] left-[22%] w-4 h-4 bg-blue-500 rounded-full filter blur-[1px] shadow-[0_0_8px_#3b82f6]"></div>
+              <div class="absolute bottom-[28%] right-[25%] w-3.5 h-3.5 bg-indigo-500 rounded-full filter blur-[1px] shadow-[0_0_8px_#6366f1]"></div>
+              <div class="absolute top-[20%] right-[32%] w-3 h-3 bg-amber-400 rounded-full filter blur-[1px] shadow-[0_0_8px_#f59e0b]"></div>
+
+              <!-- Centered Atomic Nucleus -->
+              <div class="relative z-10 flex flex-col items-center space-y-2">
+                <div class="w-16 h-16 bg-gradient-to-tr from-blue-400 via-indigo-600 to-indigo-500 rounded-full flex items-center justify-center shadow-xl shadow-indigo-500/20 border border-white/10">
+                  <i data-lucide="activity" class="w-8 h-8 text-white"></i>
+                </div>
+                <div class="text-center">
+                  <div class="text-xs font-mono text-blue-400 font-bold uppercase tracking-wider">Fisika Interaktif</div>
+                  <div class="text-[10px] font-mono text-slate-500">v = s / t &bull; F = m &bull; a</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Cara Kerja Section -->
+    <section id="cara-kerja" class="bg-brandDark py-20 border-y border-blue-900/20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center space-y-3 max-w-3xl mx-auto mb-16">
+          <h2 class="text-3xl font-bold font-display tracking-tight text-white">Cara Kerja</h2>
+          <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+            Dapatkan pemahaman visual dari persoalan fisika hanya dalam tiga langkah mudah.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <!-- Step 1 Card -->
+          <div class="bg-brandDarker border border-blue-900/30 p-8 rounded-2xl space-y-4 hover:border-blue-900/50 transition duration-300">
+            <div class="bg-blue-500/10 border border-blue-400/20 w-12 h-12 rounded-xl flex items-center justify-center text-blue-400 shadow-inner">
+              <i data-lucide="edit-3" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold font-display text-white">1. Masukkan Soal</h3>
+            <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+              Tulis atau salin soal cerita fisika yang ingin Anda analisis ke dalam kolom input yang disediakan di bawah ini.
+            </p>
+          </div>
+
+          <!-- Step 2 Card -->
+          <div class="bg-brandDarker border border-blue-900/30 p-8 rounded-2xl space-y-4 hover:border-blue-900/50 transition duration-300">
+            <div class="bg-indigo-500/10 border border-indigo-400/20 w-12 h-12 rounded-xl flex items-center justify-center text-indigo-400 shadow-inner">
+              <i data-lucide="cpu" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold font-display text-white">2. AI Menganalisis</h3>
+            <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+              Mesin pendeteksi AI kami akan langsung membaca teks, mengekstrak variabel angka, mengidentifikasi konsep, dan memilih rumus yang tepat.
+            </p>
+          </div>
+
+          <!-- Step 3 Card -->
+          <div class="bg-brandDarker border border-blue-900/30 p-8 rounded-2xl space-y-4 hover:border-blue-900/50 transition duration-300">
+            <div class="bg-emerald-500/10 border border-emerald-400/20 w-12 h-12 rounded-xl flex items-center justify-center text-emerald-400 shadow-inner">
+              <i data-lucide="presentation" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold font-display text-white">3. Pelajari Visualisasi</h3>
+            <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+              Tonton simulasi fisik interaktif, lihat langkah demi langkah pengerjaan lengkap, dan simpan kesimpulan jawaban akhir.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Main Workspace Section: Input & Dynamic Simulation Area -->
+    <section id="input-section" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Input Card Container -->
+      <div class="bg-brandDark border border-blue-900/40 rounded-3xl p-6 sm:p-10 shadow-2xl space-y-6 max-w-4xl mx-auto">
+        <div class="flex items-center space-x-3 border-b border-blue-900/20 pb-5">
+          <div class="bg-blue-600/20 border border-blue-500/30 p-2.5 rounded-lg text-blue-400">
+            <i data-lucide="help-circle" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-bold font-display text-white">Masukkan Soal Fisika</h2>
+            <p class="text-slate-400 text-xs sm:text-sm">Tuliskan soal cerita fisika lengkap dengan variabel angka untuk divisualisasikan.</p>
+          </div>
+        </div>
+
+        <!-- Alert Notification (If textarea is empty or unhandled concepts) -->
+        <div id="alert-container" class="hidden bg-red-950/40 border border-red-800/60 p-4 rounded-xl flex items-start space-x-3 text-red-300">
+          <i data-lucide="alert-triangle" class="w-5 h-5 flex-shrink-0 mt-0.5 text-red-400"></i>
+          <p id="alert-message" class="text-xs sm:text-sm"></p>
+        </div>
+
+        <!-- Textarea input field -->
+        <div class="space-y-2">
+          <label for="soal-textarea" class="block text-xs font-semibold text-slate-400 uppercase tracking-wide">Teks Soal Cerita</label>
+          <textarea id="soal-textarea" class="w-full h-36 bg-brandDarker border border-blue-900/30 rounded-2xl p-4 text-slate-100 placeholder:text-slate-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition text-sm sm:text-base font-sans" placeholder="Contoh: Sebuah mobil bergerak dengan kecepatan awal 10 m/s dan mengalami percepatan 2 m/s² selama 5 detik. Berapakah kecepatan akhirnya?"></textarea>
+        </div>
+
+        <!-- Quick Sample Badges -->
+        <div class="space-y-3 pt-1">
+          <span class="block text-xs font-semibold text-slate-400 uppercase tracking-wide">Pilih Contoh Soal Cepat:</span>
+          <div class="flex flex-wrap gap-2.5">
+            <button id="example-glbb" class="bg-slate-900/80 hover:bg-slate-850 hover:border-blue-500/40 border border-blue-900/30 text-blue-400 text-xs px-3.5 py-2.5 rounded-xl font-medium transition cursor-pointer flex items-center space-x-1.5">
+              <i data-lucide="car" class="w-3.5 h-3.5 text-blue-400"></i>
+              <span>Gerak Lurus (GLBB)</span>
+            </button>
+            <button id="example-newton" class="bg-slate-900/80 hover:bg-slate-850 hover:border-indigo-500/40 border border-blue-900/30 text-indigo-400 text-xs px-3.5 py-2.5 rounded-xl font-medium transition cursor-pointer flex items-center space-x-1.5">
+              <i data-lucide="scale" class="w-3.5 h-3.5 text-indigo-400"></i>
+              <span>Hukum Newton (F=ma)</span>
+            </button>
+            <button id="example-energi" class="bg-slate-900/80 hover:bg-slate-850 hover:border-amber-500/40 border border-blue-900/30 text-amber-400 text-xs px-3.5 py-2.5 rounded-xl font-medium transition cursor-pointer flex items-center space-x-1.5">
+              <i data-lucide="zap" class="w-3.5 h-3.5 text-amber-400"></i>
+              <span>Energi Potensial</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Action submit button -->
+        <div class="pt-4 border-t border-blue-900/20 flex justify-end">
+          <button id="btn-analyze" class="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold px-8 py-3.5 rounded-xl shadow-lg hover:shadow-indigo-500/25 transition duration-300 flex items-center justify-center space-x-2 cursor-pointer neon-glow-purple">
+            <i data-lucide="sparkles" class="w-4.5 h-4.5 text-white"></i>
+            <span>Analisis dengan AI</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Simulated Loading Screen -->
+      <div id="loading-section" class="hidden mt-16 max-w-md mx-auto bg-brandDark border border-blue-900/40 p-8 rounded-2xl shadow-xl text-center space-y-5">
+        <div class="relative w-16 h-16 mx-auto flex items-center justify-center">
+          <div class="absolute inset-0 border-4 border-blue-500/20 border-t-blue-500 rounded-full animate-spin"></div>
+          <i data-lucide="cpu" class="w-6 h-6 text-blue-400 animate-pulse"></i>
+        </div>
+        <div class="space-y-1">
+          <h4 class="text-white font-bold font-display">AI sedang menganalisis soal...</h4>
+          <p class="text-xs text-slate-400">Mendeteksi variabel, merumuskan model, dan menyusun visualisasi simulasi.</p>
+        </div>
+        <!-- Progress bar simulation -->
+        <div class="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden border border-blue-900/20">
+          <div class="shimmer-bg h-full w-full"></div>
+        </div>
+      </div>
+
+      <!-- Result Terminal (6-Card Grid Layout) -->
+      <div id="result-section" class="hidden mt-20 space-y-8">
+        
+        <!-- Result Header -->
+        <div class="text-center space-y-2 border-b border-blue-900/30 pb-6">
+          <h2 class="text-2xl sm:text-3xl font-bold font-display tracking-tight text-white flex items-center justify-center space-x-2">
+            <i data-lucide="sparkle" class="w-7 h-7 text-blue-400"></i>
+            <span>Hasil Analisis AI</span>
+          </h2>
+          <p class="text-slate-400 text-sm">Berikut adalah hasil pemodelan matematika dan visualisasi mekanik untuk soal cerita Anda.</p>
+        </div>
+
+        <!-- Bento Grid 6 Cards Structure -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          
+          <!-- Column Left (GLBB/Newton/Energy Details) - Col span 5 -->
+          <div class="lg:col-span-5 space-y-6">
+            
+            <!-- CARD 1: Analisis Soal (Concept & Description) -->
+            <div class="bg-brandDark border border-blue-900/30 p-6 rounded-2xl space-y-3.5 hover:border-blue-900/50 transition shadow-lg">
+              <div class="flex items-center justify-between">
+                <span id="concept-badge" class="bg-blue-950/60 border border-blue-800/40 text-blue-400 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">Kategori</span>
+                <i data-lucide="book-open" class="w-4 h-4 text-slate-500"></i>
+              </div>
+              <div class="space-y-2">
+                <h3 class="text-lg font-bold font-display text-white" id="concept-name">Nama Konsep Fisika</h3>
+                <p id="concept-desc" class="text-slate-400 text-xs sm:text-sm leading-relaxed">Deskripsi konsep fisika yang terdeteksi dari kalimat soal cerita yang dianalisis oleh AI.</p>
+              </div>
+            </div>
+
+            <!-- CARD 2: Informasi Soal (Diketahui & Ditanyakan) -->
+            <div class="bg-brandDark border border-blue-900/30 p-6 rounded-2xl space-y-4 hover:border-blue-900/50 transition shadow-lg">
+              <div class="flex items-center space-x-2 border-b border-blue-900/20 pb-3">
+                <i data-lucide="clipboard-list" class="w-4.5 h-4.5 text-blue-400"></i>
+                <h3 class="text-sm font-bold font-display uppercase tracking-wider text-slate-200">Ekstraksi Variabel</h3>
+              </div>
+              <div class="space-y-3">
+                <div class="space-y-2">
+                  <span class="text-xs text-slate-500 font-bold uppercase tracking-wider">Diketahui (Input):</span>
+                  <ul id="list-known" class="space-y-2">
+                    <!-- Javascript will inject variables here -->
+                  </ul>
+                </div>
+                <div class="bg-brandDarker p-3 rounded-lg border border-blue-900/20 space-y-1">
+                  <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wide block">Ditanyakan (Target):</span>
+                  <p id="target-variable" class="text-sm text-slate-200 font-medium"></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- CARD 3: Rumus yang Digunakan -->
+            <div class="bg-brandDark border border-blue-900/30 p-6 rounded-2xl space-y-4 hover:border-blue-900/50 transition shadow-lg">
+              <div class="flex items-center space-x-2 border-b border-blue-900/20 pb-3">
+                <i data-lucide="function" class="w-4.5 h-4.5 text-indigo-400"></i>
+                <h3 class="text-sm font-bold font-display uppercase tracking-wider text-slate-200">Persamaan Relevan</h3>
+              </div>
+              <!-- Big stylized formula box -->
+              <div class="bg-gradient-to-r from-blue-950/40 to-indigo-950/40 border border-blue-900/30 p-5 rounded-2xl text-center my-1.5">
+                <h4 id="formula-display" class="text-2xl font-extrabold font-mono tracking-wide text-gradient">vt = v0 + at</h4>
+              </div>
+              <!-- Variable keys definition mapping -->
+              <div id="formula-variables" class="space-y-2.5">
+                <!-- Injected dynamically -->
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Column Right (Visualizer & Step derivation steps) - Col span 7 -->
+          <div class="lg:col-span-7 space-y-6">
+            
+            <!-- CARD 4: Visualisasi Fisika Interaktif (SVG or HTML simulation panel) -->
+            <div class="bg-brandDark border border-blue-900/30 p-1 rounded-2xl hover:border-blue-900/50 transition shadow-lg overflow-hidden">
+              <div id="physics-canvas" class="physics-container h-full min-h-[220px]">
+                <!-- Interactive Physics Engine SVG is injected dynamically by script.js -->
+              </div>
+            </div>
+
+            <!-- CARD 5: Langkah Penyelesaian -->
+            <div class="bg-brandDark border border-blue-900/30 p-6 rounded-2xl space-y-5 hover:border-blue-900/50 transition shadow-lg">
+              <div class="flex items-center space-x-2 border-b border-blue-900/20 pb-3">
+                <i data-lucide="footprints" class="w-4.5 h-4.5 text-emerald-400"></i>
+                <h3 class="text-sm font-bold font-display uppercase tracking-wider text-slate-200">Langkah Penyelesaian</h3>
+              </div>
+              <div id="list-steps" class="space-y-5">
+                <!-- Step by step injected dynamically -->
+              </div>
+            </div>
+
+            <!-- CARD 6: Jawaban Akhir -->
+            <div class="bg-gradient-to-r from-blue-950/50 to-indigo-950/50 border border-blue-500/30 p-6 rounded-2xl space-y-4 hover:border-blue-500/40 transition shadow-lg relative overflow-hidden">
+              <div class="absolute right-0 bottom-0 opacity-10 pointer-events-none transform translate-y-4 translate-x-4">
+                <i data-lucide="award" class="w-40 h-40 text-blue-400"></i>
+              </div>
+              
+              <div class="flex items-center space-x-2">
+                <div class="bg-blue-500/20 p-1.5 rounded-full text-blue-400">
+                  <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+                </div>
+                <span class="text-xs text-blue-400 font-bold uppercase tracking-wider font-display">Kesimpulan Jawaban Akhir</span>
+              </div>
+              
+              <p id="final-result" class="text-lg sm:text-xl font-bold font-sans text-white leading-relaxed">
+                <!-- Final text callout injected here -->
+              </p>
+              
+              <div class="text-[10px] text-slate-500 font-sans italic border-t border-blue-900/20 pt-3">
+                * AI menjelaskan konsep berdasarkan informasi yang terdapat pada soal cerita secara deterministik.
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Action Terminal Row (Reset buttons, and select other prompts) -->
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-4 pt-6 border-t border-blue-900/20">
+          <button id="btn-try-another" class="w-full sm:w-auto bg-slate-900 hover:bg-slate-850 text-blue-400 border border-blue-900/30 font-semibold px-6 py-3 rounded-xl transition flex items-center justify-center space-x-2 cursor-pointer">
+            <i data-lucide="corner-up-left" class="w-4.5 h-4.5"></i>
+            <span>Coba Soal Lain</span>
+          </button>
+          <button id="btn-reset" class="w-full sm:w-auto bg-slate-950/80 hover:bg-slate-900 text-slate-400 hover:text-slate-200 border border-blue-900/30 font-semibold px-6 py-3 rounded-xl transition flex items-center justify-center space-x-2 cursor-pointer">
+            <i data-lucide="refresh-cw" class="w-4.5 h-4.5"></i>
+            <span>Reset Soal</span>
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Tentang Section -->
+    <section id="tentang" class="bg-brandDark py-20 border-t border-blue-900/20">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+        <div class="bg-gradient-to-tr from-blue-500 to-indigo-600 w-12 h-12 rounded-2xl mx-auto flex items-center justify-center text-white shadow-lg shadow-indigo-500/10">
+          <i data-lucide="info" class="w-6 h-6"></i>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold font-display tracking-tight text-white">Tentang PhysiViz AI</h2>
+        <p class="text-slate-400 text-xs sm:text-sm leading-relaxed max-w-2xl mx-auto">
+          PhysiViz AI merupakan prototype platform pembelajaran berbasis Artificial Intelligence yang dirancang untuk membantu siswa memahami soal cerita fisika melalui visualisasi konsep, rekomendasi rumus, dan penjelasan langkah penyelesaian.
+        </p>
+        <div class="bg-brandDarker p-4.5 rounded-2xl border border-blue-900/30 max-w-lg mx-auto">
+          <p class="text-[11px] text-slate-500 leading-relaxed italic">
+            Catatan: Saat ini, sistem beroperasi sebagai prototype statis untuk tujuan demonstrasi teknologi pendidikan. Ekstraksi dan analisis AI diuji coba secara deterministik menggunakan pengenalan kata kunci dan ekspresi reguler client-side.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-brandDarker border-t border-blue-900/30 py-10 text-center space-y-3">
+      <div class="flex items-center justify-center space-x-1.5">
+        <i data-lucide="atom" class="w-5 h-5 text-blue-400 animate-spin-slow"></i>
+        <span class="text-slate-200 font-bold font-display text-sm tracking-wide">PhysiViz AI</span>
+      </div>
+      <div class="text-[11px] text-slate-500 font-sans space-y-1">
+        <p>PhysiViz AI &copy; 2026 – AI Visualisasi Soal Fisika</p>
+        <p>Prototype Educational Technology &bull; Dibuat dengan presisi visual modern</p>
+      </div>
+    </footer>
+
+    <!-- Script File Integration -->
+    <script src="./script.js"></script>
+  </body>
+</html>

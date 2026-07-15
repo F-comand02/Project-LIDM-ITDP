@@ -1,0 +1,151 @@
+/* PhysiViz AI - Custom Styles and Physics Animations */
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom floating animation */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-physics-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* Shimmer animation for loading states */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer-bg {
+  background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+}
+
+/* Grid lines pattern background */
+.grid-bg {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+/* Physics visualizer canvas styling */
+.physics-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background-color: #0f172a;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.6);
+}
+
+/* Animation classes for GLBB (Car movement) */
+@keyframes drive {
+  0% {
+    left: 10%;
+    transform: scaleX(1);
+  }
+  100% {
+    left: 80%;
+    transform: scaleX(1);
+  }
+}
+
+.car-driving {
+  animation: drive 3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+/* Animation classes for Newton (Crate pulling) */
+@keyframes pullCrate {
+  0% {
+    left: 20%;
+  }
+  100% {
+    left: 70%;
+  }
+}
+
+.crate-pulling {
+  animation: pullCrate 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Animation classes for Energy (Free fall) */
+@keyframes fall {
+  0% {
+    top: 15%;
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  85% {
+    top: 75%;
+    transform: scaleY(1) scaleX(1);
+    animation-timing-function: ease-out;
+  }
+  90% {
+    top: 75%;
+    transform: scaleY(0.7) scaleX(1.3); /* squash */
+  }
+  95% {
+    top: 72%;
+    transform: scaleY(1.1) scaleX(0.9); /* bounce */
+  }
+  100% {
+    top: 75%;
+    transform: scaleY(1) scaleX(1); /* settle */
+  }
+}
+
+.object-falling {
+  animation: fall 1.8s forwards;
+}
+
+/* Custom scrollbar to match the futuristic deep-blue design */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 130, 246, 0.4);
+}
+
+/* Neon glow classes */
+.neon-glow-blue {
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.25);
+}
+
+.neon-glow-purple {
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.25);
+}
+
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(to right, #60a5fa, #818cf8);
+}

@@ -1,0 +1,6 @@
+{
+  "name": "PhysiViz AI",
+  "description": "AI Visualisasi Soal Fisika - Membantu visualisasi, rumus, dan penyelesaian soal cerita fisika secara interaktif.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
