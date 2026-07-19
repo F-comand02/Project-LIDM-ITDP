@@ -8,6 +8,10 @@ export const knowledgeBase = {
   glbb: {
     id: "glbb",
     nama: "Gerak Lurus Berubah Beraturan (GLBB)",
+    grade: 10,
+    chapter: "Kinematika",
+    difficulty: "Mudah",
+    description: "Soal ini termasuk materi Fisika SMA Kelas X karena membahas konsep Gerak Lurus Berubah Beraturan.",
     keyword: ["kecepatan", "percepatan", "waktu", "jarak", "mobil", "motor", "cepat", "lambat", "detik", "sekon", "m/s", "m/s²"],
     deskripsi: "Studi kinematika gerak linear satu dimensi dengan percepatan tetap konstan di mana kecepatan berubah secara teratur setiap detik.",
     rumus: {
@@ -43,6 +47,10 @@ export const knowledgeBase = {
   parabola: {
     id: "parabola",
     nama: "Gerak Parabola (Projectile Motion)",
+    grade: 10,
+    chapter: "Kinematika",
+    difficulty: "Sedang",
+    description: "Soal ini termasuk materi Fisika SMA Kelas X karena membahas konsep Gerak Parabola.",
     keyword: ["bola", "peluru", "sudut", "elevasi", "parabola", "lempar", "tembak", "proyektil", "derajat", "gravitasi"],
     deskripsi: "Perpaduan gerak lurus beraturan (GLB) arah horizontal dan gerak lurus berubah beraturan (GLBB) vertikal di bawah pengaruh gravitasi.",
     rumus: {
@@ -80,6 +88,10 @@ export const knowledgeBase = {
   newton: {
     id: "newton",
     nama: "Hukum II Newton (Dinamika Gerak)",
+    grade: 10,
+    chapter: "Dinamika",
+    difficulty: "Sedang",
+    description: "Soal ini termasuk materi Fisika SMA Kelas X karena membahas konsep Hukum Newton.",
     keyword: ["gaya", "massa", "gesekan", "bidang miring", "normal", "tarik", "dorong", "balok", "newton", "kg"],
     deskripsi: "Hubungan dinamika di mana percepatan benda berbanding lurus dengan gaya bersih luar dan berbanding terbalik dengan massanya.",
     rumus: {
@@ -112,6 +124,10 @@ export const knowledgeBase = {
   pascal: {
     id: "pascal",
     nama: "Hukum Pascal (Mekanika Fluida)",
+    grade: 11,
+    chapter: "Fluida",
+    difficulty: "Mudah",
+    description: "Soal ini termasuk materi Fisika SMA Kelas XI karena membahas konsep Hukum Pascal.",
     keyword: ["hidrolik", "fluida", "dongkrak", "tekanan", "piston", "penampang", "bejana", "pascal", "cm²"],
     deskripsi: "Prinsip hidrolik di mana tekanan eksternal pada fluida tertutup akan diteruskan ke segala arah secara merata dengan besar sama.",
     rumus: {
@@ -145,6 +161,10 @@ export const knowledgeBase = {
   gelombang: {
     id: "gelombang",
     nama: "Gelombang Mekanik",
+    grade: 11,
+    chapter: "Gelombang",
+    difficulty: "Sedang",
+    description: "Soal ini termasuk materi Fisika SMA Kelas XI karena membahas konsep Gelombang Berjalan atau Gelombang Stasioner.",
     keyword: ["gelombang", "sinus", "amplitudo", "frekuensi", "panjang gelombang", "cepat rambat", "rambat", "periode", "hz", "getaran"],
     deskripsi: "Perambatan getaran energi periodik dalam suatu medium tanpa disertai perpindahan partikel mediumnya secara permanen.",
     rumus: {
@@ -180,6 +200,10 @@ export const knowledgeBase = {
   kirchhoff: {
     id: "kirchhoff",
     nama: "Hukum I Kirchhoff (Kelistrikan)",
+    grade: 12,
+    chapter: "Listrik Dinamis",
+    difficulty: "Sulit",
+    description: "Soal ini termasuk materi Fisika SMA Kelas XII karena membahas Hukum Kirchhoff.",
     keyword: ["resistor", "loop", "arus", "tegangan", "baterai", "kirchhoff", "percabangan", "masuk", "keluar", "ampere"],
     deskripsi: "Hukum kekekalan muatan listrik di mana jumlah arus listrik yang memasuki suatu titik cabang sama dengan jumlah arus yang keluar.",
     rumus: {
@@ -212,6 +236,10 @@ export const knowledgeBase = {
   lorentz: {
     id: "lorentz",
     nama: "Gaya Lorentz (Elektromagnetisme)",
+    grade: 12,
+    chapter: "Elektromagnetisme",
+    difficulty: "Sulit",
+    description: "Soal ini termasuk materi Fisika SMA Kelas XII karena membahas konsep Gaya Lorentz.",
     keyword: ["magnet", "medan magnet", "arus", "gaya lorentz", "muatan", "tesla", "kawat", "konduktor", "lorentz"],
     deskripsi: "Gaya mekanis yang timbul akibat interaksi kawat penghantar berarus listrik yang ditembus medan magnet homogen.",
     rumus: {
