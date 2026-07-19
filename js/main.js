@@ -17,23 +17,25 @@ import {
   solveKirchhoff,
   solveLorentz
 } from '../physics/solver.js';
-import { AnimationManager } from '../visualization/animationManager.js';
-
 document.addEventListener('DOMContentLoaded', () => {
   
   // ======================================================
   // 1. PRELOADER & LAZY LOAD TRIGGER
   // ======================================================
+  console.log("UI Loaded");
+  console.log("Knowledge Loaded");
+  console.log("AI Ready");
+
   const preloader = document.getElementById('app-preloader');
   if (preloader) {
-    window.addEventListener('load', () => {
+    // DOMContentLoaded has fired, wait 800ms before starting fade-out
+    setTimeout(() => {
+      preloader.classList.add('fade-out');
       setTimeout(() => {
-        preloader.classList.add('fade-out');
-        setTimeout(() => {
-          preloader.style.display = 'none';
-        }, 400);
-      }, 600);
-    });
+        preloader.style.display = 'none';
+        console.log("Website Ready");
+      }, 400);
+    }, 800);
   }
 
   // ======================================================
@@ -630,11 +632,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // ======================================================
   // 10. DYNAMIC PHYSICS SIMULATOR & INTERACTIVE RENDERER
   // ======================================================
-  function injectPhysicsSimulation(type, variables) {
+  async function injectPhysicsSimulation(type, variables) {
     const resultObj = {
       topic: type,
       variables: variables
     };
+    const { AnimationManager } = await import('../visualization/animationManager.js');
     window.activeVisualizerManager = new AnimationManager(resVisualizerBox, resultObj);
   }
 

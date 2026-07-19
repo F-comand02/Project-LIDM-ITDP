@@ -5,14 +5,6 @@
  * and initializes/manages the active physical visualizer.
  */
 
-import { GLBBVisualizer } from "./glbb.js";
-import { ProjectileVisualizer } from "./projectile.js";
-import { NewtonVisualizer } from "./newton.js";
-import { PascalVisualizer } from "./pascal.js";
-import { WaveVisualizer } from "./wave.js";
-import { CircuitVisualizer } from "./circuit.js";
-import { LorentzRenderer } from "./lorentz/lorentzRenderer.js";
-
 export class AnimationManager {
   constructor(container, result) {
     // Safely dispose of any previous visualizer to prevent WebGL memory leaks and ghost render loops
@@ -62,44 +54,81 @@ export class AnimationManager {
     this.buildControlTray();
   }
 
-  launchVisualizer() {
+  async launchVisualizer() {
     const topicId = this.detectTopicId(this.result.topic);
     const vars = this.result.variables || {};
 
-    switch (topicId) {
-      case "glbb":
-        this.currentVisualizer = new GLBBVisualizer(this.stage, vars);
-        break;
+    // Show dynamic loading state
+    const stageLoading = document.createElement("div");
+    stageLoading.className = "absolute inset-0 flex flex-col items-center justify-center text-slate-400 gap-2 bg-[#090D16] z-10";
+    stageLoading.innerHTML = `
+      <div class="spinner-mini animate-spin h-6 w-6 border-2 border-indigo-500 rounded-full border-t-transparent"></div>
+      <span class="text-xs font-mono">Loading simulator module...</span>
+    `;
+    this.stage.appendChild(stageLoading);
 
-      case "parabola":
-        this.currentVisualizer = new ProjectileVisualizer(this.stage, vars);
-        break;
+    try {
+      switch (topicId) {
+        case "glbb": {
+          const { GLBBVisualizer } = await import("./glbb.js");
+          this.currentVisualizer = new GLBBVisualizer(this.stage, vars);
+          break;
+        }
 
-      case "newton":
-        this.currentVisualizer = new NewtonVisualizer(this.stage, vars);
-        break;
+        case "parabola": {
+          const { ProjectileVisualizer } = await import("./projectile.js");
+          this.currentVisualizer = new ProjectileVisualizer(this.stage, vars);
+          break;
+        }
 
-      case "pascal":
-        this.currentVisualizer = new PascalVisualizer(this.stage, vars);
-        break;
+        case "newton": {
+          const { NewtonVisualizer } = await import("./newton.js");
+          this.currentVisualizer = new NewtonVisualizer(this.stage, vars);
+          break;
+        }
 
-      case "gelombang":
-        this.currentVisualizer = new WaveVisualizer(this.stage, vars);
-        break;
+        case "pascal": {
+          const { PascalVisualizer } = await import("./pascal.js");
+          this.currentVisualizer = new PascalVisualizer(this.stage, vars);
+          break;
+        }
 
-      case "kirchhoff":
-        this.currentVisualizer = new CircuitVisualizer(this.stage, vars);
-        break;
+        case "gelombang": {
+          const { WaveVisualizer } = await import("./wave.js");
+          this.currentVisualizer = new WaveVisualizer(this.stage, vars);
+          break;
+        }
 
-      case "lorentz":
-        // Handle Lorentz beautifully with our high-fidelity 3D Three.js simulator
-        this.currentVisualizer = new LorentzRenderer(this.stage, vars);
-        break;
+        case "kirchhoff": {
+          const { CircuitVisualizer } = await import("./circuit.js");
+          this.currentVisualizer = new CircuitVisualizer(this.stage, vars);
+          break;
+        }
 
-      default:
-        console.warn(`Visualizer for topic ${topicId} not implemented. Falling back to GLBB.`);
-        this.currentVisualizer = new GLBBVisualizer(this.stage, vars);
-        break;
+        case "lorentz": {
+          console.log("Lorentz requested. Dynamically loading Three.js and Lorentz renderer...");
+          const { LorentzRenderer } = await import("./lorentz/lorentzRenderer.js");
+          this.currentVisualizer = new LorentzRenderer(this.stage, vars);
+          break;
+        }
+
+        default: {
+          const { GLBBVisualizer } = await import("./glbb.js");
+          this.currentVisualizer = new GLBBVisualizer(this.stage, vars);
+          break;
+        }
+      }
+    } catch (err) {
+      console.error("Failed to dynamically load visualizer:", err);
+      stageLoading.innerHTML = `
+        <i class="fas fa-exclamation-triangle text-red-500 text-xl"></i>
+        <span class="text-xs font-mono text-red-400">Failed to load module.</span>
+      `;
+      return;
+    } finally {
+      if (stageLoading.parentNode) {
+        stageLoading.parentNode.removeChild(stageLoading);
+      }
     }
   }
 
@@ -205,7 +234,8 @@ export class AnimationManager {
     });
 
     // Handle SVG specific speed scaling if CircuitVisualizer is active
-    if (this.currentVisualizer instanceof CircuitVisualizer) {
+    const topicId = this.detectTopicId(this.result.topic);
+    if (topicId === "kirchhoff") {
       // Speed dropdown multiplier changes SVG animation timing
       speedSelect.addEventListener("change", (e) => {
         const speed = parseFloat(e.target.value);
